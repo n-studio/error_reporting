@@ -1,0 +1,40 @@
+<h2 style="color: #b91c1c; margin: 0 0 8px;"><%= @error_report.error_class %></h2>
+<p style="color: #374151; margin: 0 0 16px;"><%= @error_report.message %></p>
+
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px;">
+  <tr>
+    <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">Severity</td>
+    <td style="padding: 4px 8px;"><%= @error_report.severity %></td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">Source</td>
+    <td style="padding: 4px 8px;"><%= @error_report.source %></td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">Time</td>
+    <td style="padding: 4px 8px;"><%= @error_report.created_at.to_formatted_s(:default) %></td>
+  </tr>
+  <% if @error_report.request_url.present? %>
+    <tr>
+      <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">URL</td>
+      <td style="padding: 4px 8px;"><%= @error_report.request_method %> <%= @error_report.request_url %></td>
+    </tr>
+  <% end %>
+  <% if @error_report.ip_address.present? %>
+    <tr>
+      <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">IP</td>
+      <td style="padding: 4px 8px;"><%= @error_report.ip_address %></td>
+    </tr>
+  <% end %>
+  <% if @error_report.user_id.present? %>
+    <tr>
+      <td style="padding: 4px 8px; color: #6b7280; font-weight: 600;">User</td>
+      <td style="padding: 4px 8px;">User #<%= @error_report.user_id %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% if @error_report.backtrace.present? %>
+  <h3 style="color: #374151; margin: 0 0 8px;">Backtrace</h3>
+  <pre style="background: #f3f4f6; padding: 12px; border-radius: 4px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word;"><%= @error_report.backtrace %></pre>
+<% end %>
